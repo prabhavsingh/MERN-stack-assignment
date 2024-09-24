@@ -1,0 +1,29 @@
+services:
+  backend:
+    build: ./node-backend
+    container_name: backend-container-node
+    ports:
+      - "3000:3000"
+    env_file:
+      - ./node-backend/.env
+    volumes:
+      - ./node-backend:/app
+      - /app/node_modules
+    networks:
+      - app-network
+
+  frontend:
+    build: ./react-frontend
+    container_name: frontend-container-react
+    ports:
+      - "4000:4000"
+    env_file:
+      - ./react-frontend/.env
+    volumes:
+      - ./react-frontend:/app
+      - /app/node_modules
+    networks:
+      - app-network
+
+networks:
+  app-network:
